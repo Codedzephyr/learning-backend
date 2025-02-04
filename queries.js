@@ -6,6 +6,7 @@ const pool = new Pool({
     password: 'password',
     port: 5432,
 });
+
 const getTasks = (req, res) => {
     pool.query('SELECT * FROM tasks ORDER BY id ASC', (error, results) => {
         if (error) {

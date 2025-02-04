@@ -57,11 +57,6 @@ app.post('/tasks', db.createTask);
 app.put('/tasks/:id', db.updateTask);
 app.delete('/tasks/:id', db.deleteTask);
 
-// server listener
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});;
-//   });
   
 //   router.get("/101", (req, res) => {
 // 	res.send("This is the project 101 page");
