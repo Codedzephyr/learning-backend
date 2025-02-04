@@ -7,6 +7,7 @@ const pool = new Pool({
     port: 5432,
 });
 
+//parameterized query with placeholder $1, $2 to prevent SQL injections
 const getTasks = (req, res) => {
     pool.query('SELECT * FROM tasks ORDER BY id ASC', (error, results) => {
         if (error) {
