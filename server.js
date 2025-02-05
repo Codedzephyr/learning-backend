@@ -1,7 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const {logRequest, authenticate} = require('./middleware');
 const app = express();
 const port = 3000;
+
+// use logging middleware for all routes
+// app.use(logRequest);
+
+// use authentication middleware for all routes
+// app.use('/tasks', authenticate);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,13 +23,6 @@ const projectRoute = require('./routes/project');
 app.use('/task', taskRoute);
 app.use('/project', projectRoute);
 
-const db = require('./queries');
-
-app.get('/tasks', db.getTasks);
-app.get('/tasks/:id', db.getTaskById);
-app.post('/tasks', db.createTask);
-app.put('/tasks/:id', db.updateTask);
-app.delete('/tasks/:id', db.deleteTask);
 
 // server listener
 app.listen(port,() => {
