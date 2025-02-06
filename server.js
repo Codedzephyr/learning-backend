@@ -1,8 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
-const {logRequest, authenticate} = require('./middleware');
+const {logRequest, authenticate, errorHandler} = require('./middleware');
 const app = express();
-const port = 3000;
+const port =  process.env.PORT || 3000;
+
 
 // use logging middleware for all routes
 // app.use(logRequest);
@@ -18,11 +21,14 @@ app.get('/', (req, res) => {
 });
 
 const taskRoute = require('./routes/task');
+const tasksDbRoute = require('./routes/tasks')
 const projectRoute = require('./routes/project');
 
 app.use('/task', taskRoute);
 app.use('/project', projectRoute);
+app.use('/api/tasks', tasksDbRoute)
 
+// app.use(errorHandler);
 
 // server listener
 app.listen(port,() => {
